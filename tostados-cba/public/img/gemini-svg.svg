@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <!-- Fondo oscuro -->
+  <rect width="100" height="100" fill="#1c1c1c" />
+  
+  <!-- Capa 1: Triángulo trasero (Amarillo claro) -->
+  <polygon points="19,82 63,17 81,82" fill="#fde08b" />
+  
+  <!-- Capa 2: Triángulo medio-trasero (Salmón/Rosa) -->
+  <polygon points="25,82 69,17 81,82" fill="#f68b81" />
+  
+  <!-- Capa 3: Triángulo medio-frontal (Mostaza) -->
+  <polygon points="31,82 75,17 81,82" fill="#f0b83a" />
+  
+  <!-- Capa 4a: Franja frontal izquierda (Amarillo claro) -->
+  <polygon points="37,82 81,17 55,82" fill="#fde08b" />
+  
+  <!-- Capa 4b: Franja frontal derecha (Blanco crema) -->
+  <polygon points="55,82 81,17 81,82" fill="#f6efe5" />
+</svg>
