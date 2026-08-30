@@ -1,16 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TabSelector from "@/components/TabSelector";
+import ListaReviews from "@/components/ListaReviews";
+import ReactMarkdown from "react-markdown";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("reviews");
+  
+  // Estado para guardar el contenido del archivo .md
+  const [reglasMarkdown, setReglasMarkdown] = useState("");
+
+  // Hook para buscar el archivo de reglas al cargar la página
+  useEffect(() => {
+    fetch("/reglas.md")
+      .then((res) => res.text())
+      .then((text) => setReglasMarkdown(text))
+      .catch((err) => console.error("Error cargando las reglas:", err));
+  }, []);
 
   return (
-    // Fondo principal celeste argentino
-    <div className="min-h-screen flex flex-col relative overflow-hidden bg-sky-400">
+    // Fondo principal
+    <div className="min-h-screen flex flex-col relative overflow-hidden bg-red-600">
       
       <style>{`
         @keyframes slideBackground {
@@ -37,7 +50,7 @@ export default function Home() {
         ></div>
 
         {/* Capa 2: Un gradiente para darle profundidad en lugar de un color sólido oscuro */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-sky-900/40 pointer-events-none"></div>
+        <div className="llinear-gradient(180deg, var(--zafaari-plum) 0%, var(--zafaari-plum-strong) 100%)"></div>
         
         <div className="relative z-10 p-8 max-w-7xl mx-auto flex flex-col items-center min-h-[60vh] mt-8">
           
@@ -49,25 +62,34 @@ export default function Home() {
           <TabSelector activeTab={activeTab} setActiveTab={setActiveTab} />
 
           {/* Contenedor dinámico: Borde azul en lugar de rojo */}
-          <div className="w-full max-w-4xl bg-white/95 p-8 rounded-xl shadow-xl border-4 border-blue-600 min-h-[300px]">
-            {activeTab === "reglas" && (
-              <div className="animate-fade-in">
-                {/* Textos azules con subrayado celeste */}
-                <h2 className="text-3xl font-bold text-blue-800 mb-4 border-b-2 border-sky-400 pb-2">Reglas del Ranking</h2>
-                <p className="text-gray-700 text-lg">
-                  Acá vamos a detallar los criterios de evaluación. Por ejemplo: calidad del pan, proporción de queso/jamón, precio y atención.
-                </p>
-              </div>
-            )}
+          <div className="w-full max-w-4xl bg-[#fcfbfa] p-8 rounded-xl shadow-xl border-4 border-black min-h-[300px]">
+                
+                {/* Pestaña de Reglas */}
+                {activeTab === "reglas" && (
+                  <div className="animate-fade-in">
+                    <h2 className="text-3xl font-bold text-blue-800 mb-4 border-b-2 border-sky-400 pb-2">
+                      Reglas del Ranking
+                    </h2>
+                    
+                    {/* Contenedor del Markdown */}
+                    <div className="text-gray-700 text-lg space-y-4 prose-ul:list-disc prose-ul:pl-6">
+                      <ReactMarkdown>{reglasMarkdown}</ReactMarkdown>
+                    </div>
+                  </div>
+                )}
 
-            {activeTab === "reviews" && (
-              <div className="animate-fade-in">
-                <h2 className="text-3xl font-bold text-blue-800 mb-4 border-b-2 border-sky-400 pb-2">Reviews</h2>
-                <p className="text-gray-700 text-lg">
-                  Acá va a ir la lista de todos los tostados que vayas probando por Córdoba.
-                </p>
-              </div>
-            )}
+                {/* Pestaña de Reviews */}
+                {activeTab === "reviews" && (
+                  <div className="animate-fade-in">
+                    <h2 className="text-3xl font-bold text-blue-800 mb-4 border-b-2 border-sky-400 pb-2">
+                      Reviews
+                    </h2>
+                    
+                    {/* Insertamos tu componente acá */}
+                    <ListaReviews />
+                  </div>
+                )}
+
           </div>
 
         </div>

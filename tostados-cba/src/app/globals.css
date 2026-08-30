@@ -1,8 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --zafaari-plum: #1a1225;
+  --zafaari-plum-strong: #2d1b35;
+  --zafaari-mauve: #8f5379;
+  --zafaari-rose: #d77d79;
+  --zafaari-coral: #ee8a61;
+  --zafaari-gold: #f1c86b;
+  --zafaari-cream: #f7f1e7;
+  --zafaari-sage: #7a9084;
+  --zafaari-ink: #271d2c;
+  --background: var(--zafaari-cream);
+  --foreground: var(--zafaari-ink);
 }
 
 @theme inline {
@@ -14,13 +23,19 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--zafaari-plum);
+    --foreground: var(--zafaari-cream);
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at top, rgba(241, 200, 107, 0.18), transparent 25%),
+    linear-gradient(180deg, var(--zafaari-plum) 0%, var(--zafaari-plum-strong) 100%);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -41,10 +56,25 @@ body {
 
 /* Patrón de triángulos (Tostados) */
 .bg-tostados {
-  /* Fondo base amarillo */
-  background-color: #facc15; 
-  /* SVG de un triángulo rojo que, intercalado con el amarillo, forma cuadrados (tostados) */
-  background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L64 0 L0 64 Z' fill='%23ef4444' /%3E%3C/svg%3E");
+  background-color: var(--zafaari-gold);
+  background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L64 0 L0 64 Z' fill='%23d77d79' /%3E%3C/svg%3E");
   background-size: 64px 64px;
   animation: tostado-slide 3s linear infinite;
+}
+
+.zafaari-panel {
+  background: rgba(247, 241, 231, 0.96);
+  border: 3px solid rgba(241, 200, 107, 0.9);
+  box-shadow: 0 24px 60px rgba(16, 10, 20, 0.28);
+}
+
+.zafaari-button {
+  background: linear-gradient(135deg, var(--zafaari-gold), var(--zafaari-coral));
+  color: var(--zafaari-plum);
+}
+
+.zafaari-chip {
+  background: rgba(241, 200, 107, 0.14);
+  color: var(--zafaari-plum-strong);
+  border: 1px solid rgba(143, 83, 121, 0.35);
 }
